@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 from paddle import Paddle
 from bricks import Bricks
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 screen = Screen()
@@ -13,6 +14,7 @@ screen.tracer(0)
 paddle = Paddle()
 bricks = Bricks()
 ball = Ball()
+score = Scoreboard()
 
 screen.listen()
 screen.onkey(paddle.move_left, "s")
@@ -20,13 +22,14 @@ screen.onkey(paddle.move_right, "d")
 
 game_over = False
 
+
 while not game_over:
     time.sleep(ball.move_speed)
     screen.update()
     ball.move()
 
     print(ball.xcor())
-    # print(ball.ycor())
+    print(ball.ycor())
     # print(paddle.xcor(), paddle.ycor())
     # print(ball.distance(paddle))
     # print(ball.distance(bricks.bricks_list[0]))
@@ -34,10 +37,20 @@ while not game_over:
 
     if ball.ycor() > 290:
         ball.bounce_y()
-    if ball.xcor() > 380 or ball.xcor() < -380:
+    if ball.xcor() > 375 or ball.xcor() < -375:
         ball.bounce_x()
-    if ball.distance(paddle) < 50 and ball.ycor() < -260:
+    if ball.ycor() < -275:
+        ball.restart()
+        ball.move()
+    if ball.distance(paddle) < 50 and ball.ycor() < -245:
         ball.bounce_y()
+    for brick in bricks.bricks_list:
+        if ball.distance(brick) < 33:
+            brick.goto(1000, 1000)
+            ball.bounce_y()
+            score.score_up(brick)
+
+
 screen.update()
 
 screen.exitonclick()

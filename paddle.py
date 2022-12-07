@@ -8,7 +8,7 @@ class Paddle(Turtle):
         self.penup()
         self.color("gray")
         self.resizemode("user")
-        self.shapesize(1, 5, 1)
+        self.shapesize(stretch_wid=1, stretch_len=5)
         self.goto(0, -275)
         print(self.xcor(), self.ycor())
         self.speed(0)
@@ -18,12 +18,12 @@ class Paddle(Turtle):
         self.shapesize(1, 3, 1)
 
     def move_left(self):
-        if self.xcor() != -360:
+        if self.xcor() != -340:
             self.back(20)
             print(self.xcor(), self.ycor())
 
     def move_right(self):
-        if self.xcor() != 360:
+        if self.xcor() != 340:
             self.forward(20)
             print(self.xcor(), self.ycor())
 
