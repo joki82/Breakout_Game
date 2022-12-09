@@ -2,6 +2,7 @@ from turtle import Turtle
 
 
 class Paddle(Turtle):
+    """Creates paddle and moving methods."""
     def __init__(self):
         super().__init__()
         self.shape("square")
@@ -10,7 +11,6 @@ class Paddle(Turtle):
         self.resizemode("user")
         self.shapesize(stretch_wid=1, stretch_len=5)
         self.goto(0, -275)
-        print(self.xcor(), self.ycor())
         self.speed(0)
 
     def small_paddle(self):
@@ -18,16 +18,16 @@ class Paddle(Turtle):
         self.shapesize(1, 3, 1)
 
     def move_left(self):
+        """Moves paddle to left, limited to -340"""
         if self.xcor() != -340:
             self.back(20)
-            print(self.xcor(), self.ycor())
+
 
     def move_right(self):
+        """Moves paddle to the right, limited to 340"""
         if self.xcor() != 340:
             self.forward(20)
-            print(self.xcor(), self.ycor())
 
-    def ball_speed(self):
-        """Ball speed increases at specific intervals: after four hits, after twelve hits,
-        and after making contact with the orange and red rows."""
-        pass
+    def reset_position(self):
+        """Reset paddle position to starting position, after ball has been missed."""
+        self.goto(0, -275)

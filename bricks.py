@@ -2,6 +2,7 @@ from turtle import Turtle
 
 
 class Bricks(Turtle):
+    """"Creates  bricks grid 8x14 in four colours."""
     def __init__(self):
         super().__init__()
         x_cor = -360

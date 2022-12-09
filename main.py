@@ -22,38 +22,34 @@ screen.onkey(paddle.move_right, "d")
 
 game_over = False
 
-
 while not game_over:
     time.sleep(ball.move_speed)
     screen.update()
     ball.move()
-
-    print(ball.xcor())
-    print(ball.ycor())
-    # print(paddle.xcor(), paddle.ycor())
-    # print(ball.distance(paddle))
-    # print(ball.distance(bricks.bricks_list[0]))
-    # print(paddle.distance(ball))
-
     if ball.ycor() > 290:
         ball.bounce_y()
+        paddle.small_paddle()
     if ball.xcor() > 375 or ball.xcor() < -375:
         ball.bounce_x()
     if ball.ycor() < -275:
         ball.restart()
+        time.sleep(1)
+        paddle.reset_position()
+        score.lost_lives()
         ball.move()
     if ball.distance(paddle) < 50 and ball.ycor() < -245:
         ball.bounce_y()
+
     for brick in bricks.bricks_list:
         if ball.distance(brick) < 33:
             brick.goto(1000, 1000)
             ball.bounce_y()
             score.score_up(brick)
+            ball.ball_speed(1, brick)
 
+    if score.lives == 0 or score.score > 448:
+        game_over = True
 
 screen.update()
 
 screen.exitonclick()
-
-if __name__ == '__main__':
-    print('PyCharm')
